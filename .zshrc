@@ -3,7 +3,7 @@ export ZSH=/home/solkaz/.oh-my-zsh
 ZSH_THEME="junkfood"
 HYPHEN_INSENSITIVE="true"
 ENABLE_CORRECTION="true"
-plugins=(command-not-found common-aliases debian git github history pip python zsh-syntax-highlighting)
+plugins=(command-not-found common-aliases debian git github history node npm pip python zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Make emacs the default editor
@@ -24,6 +24,9 @@ alias aliasrch="alias | grep"
 # Reload this config file
 alias reloadzsh="source ~/.zshrc"
 
+# Update NPM command
+alias update-npm="sudo npm install -g npm"
+
 # Add global npm packages dir to PATH
 export PATH=~/.npm-global/bin:$PATH
 
@@ -35,8 +38,9 @@ alias pf="pip freeze"
 alias pfr="pip freeze > requirements.txt"
 alias pin="pip install"
 alias pinr="pip install -r requirements.txt"
-alias puin="pip uninstall"
+alias plist="pip list"
 alias psrch="pip search"
+alias puin="pip uninstall"
 
 # Easy virtualenv activation
 alias sv="source venv/bin/activate"
@@ -61,19 +65,5 @@ babel-core babel-loader babel-preset-es2015 babel-preset-react && \
 npm i --save-dev webpack webpack-dev-server \
 "
 
-# inProject=0
-# function chpwd() {
-#     # If you weren't in the project folder already, check to see if you are
-#     if [ inProject = 1 ]; then
-# 	if [ $(pwd) != "home/solkaz/Programming/recruitr"* ]; then
-# 	    deactivate
-# 	    inProject=0
-# 	fi
-#     # You weren't in the projects folder; check to see if you
-#     else
-# 	if [[ *"/Programming/recruitr"* = $(pwd) ]]; then
-# 	    inProject=1
-# 	    sv
-# 	fi
-#     fi
-# }
+# Caps Lock -> Ctrl
+setxkbmap -option ctrl:nocaps
