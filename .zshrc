@@ -3,13 +3,15 @@ export ZSH=/home/solkaz/.oh-my-zsh
 ZSH_THEME="junkfood"
 HYPHEN_INSENSITIVE="true"
 ENABLE_CORRECTION="true"
-plugins=(command-not-found common-aliases debian git github history node npm pip python zsh-syntax-highlighting)
+plugins=(command-not-found common-aliases debian git github history node npm \
+			   pip python zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Make emacs the default editor
 export EDITOR="emacs"
 
 # If emacs is invoked in the terminal, a new window isn't created
+# nor does it load a desktop session
 alias emacs="emacs -nw --no-desktop"
 
 # Shortcuts to edit config files
@@ -24,16 +26,18 @@ alias aliasrch="alias | grep"
 # Reload this config file
 alias reloadzsh="source ~/.zshrc"
 
-# Update NPM command
-alias update-npm="sudo npm install -g npm"
-
 # Add global npm packages dir to PATH
-export PATH=~/.npm-global/bin:$PATH
+#export PATH=~/.npm-global/bin:~/scripts:$PATH
 
 # Refer to python3 as "python3"
 alias python3="python3.5"
 
-# Pip shortcuts
+# Git aliases
+alias gai="git add -i"
+alias gbd="git branch -d"
+alias gbrd="git branch -rd"
+
+# Pip aliases
 alias pf="pip freeze"
 alias pfr="pip freeze > requirements.txt"
 alias pin="pip install"
@@ -65,5 +69,32 @@ babel-core babel-loader babel-preset-es2015 babel-preset-react && \
 npm i --save-dev webpack webpack-dev-server \
 "
 
-# Caps Lock -> Ctrl
-setxkbmap -option ctrl:nocaps
+function is_root() {
+    if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root"  ; fi
+}
+
+function caps_to_ctrl() {
+    setxkbmap -option ctrl:nocaps
+    return 0
+}
+
+function new_cpp() {
+    if [ -z "$1" ]
+    then
+	echo "missing PROJECT_NAME parameter"
+    else
+	new_dir="`pwd`/$1"
+	if [ ! -d $new_dir ]
+	then
+	    echo "creating folder at $new_dir"
+	    mkdir -p $1 && cd $1
+	    mkdir src include
+	    touch Makefile
+	    cd ..
+	else
+	    echo "$new_dir already exists"
+	fi
+
+    fi
+    return 0
+}
