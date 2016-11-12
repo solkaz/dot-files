@@ -27,10 +27,17 @@
 (require 'google-this)
 (google-this-mode 1)
 (desktop-save-mode 1)
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
 (add-hook 'minibuffer-setup-hook #'subword-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (package-initialize)
 (elpy-enable)
+
+(defun open-init-file ()
+  "Open the init file."
+  (interactive)
+    (find-file user-init-file))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
