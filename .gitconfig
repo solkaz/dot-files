@@ -3,3 +3,6 @@
 	name = JMH
 [push]
 	default = matching
+
+[core]
+	excludesfile = ~/.gitignore
