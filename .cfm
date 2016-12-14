@@ -5,6 +5,7 @@
         "gitconfig": "~/.gitconfig",
         "gitignore": "~/.gitignore",
         "vim": "~/.vimrc",
+        "xresources": "~/.Xresources",
         "zshrc": "~/.zshrc"
     },
     "editor": {
