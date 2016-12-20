@@ -8,6 +8,10 @@ function temacs () {
     /usr/bin/emacs -nw --no-desktop "$@"
 }
 
+function reload-alias () {
+    source $SH_CONFIG_DIR/aliases/"$1".zsh
+    return $?
+}
 
 function woman () {
     qemacs --eval "(woman \"$1\")"
