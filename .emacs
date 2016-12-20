@@ -67,10 +67,13 @@
       kept-old-versions 6
       version-control t)
 
+(use-package flycheck
+  :config
+  (add-hook 'c++-mode-hook
+	    (lambda () (setq flycheck-gcc-language-standard "c++11")))
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
-(add-hook 'minibuffer-setup-hook #'subword-mode)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'c++-mode-hook #'subword-mode)
 
 (defun open-init-file ()
   "Open the init file."
