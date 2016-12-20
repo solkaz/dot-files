@@ -6,9 +6,9 @@ ENABLE_CORRECTION="true"
 
 export CONFIG_DIR=~/Config
 
-sh_config_dir=$CONFIG_DIR/zsh
-source $sh_config_dir/functions.zsh
-source $sh_config_dir/aliases.zsh
+export SH_CONFIG_DIR=$CONFIG_DIR/zsh
+source $SH_CONFIG_DIR/functions.zsh
+source $SH_CONFIG_DIR/aliases.zsh
 
 # Make emacs the default editor
 export EDITOR="emacs"
