@@ -46,9 +46,11 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (setq inhibit-startup-message t)
+
 (setq c-default-style "stroustrup"
       c-basic-offset 4)
 
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
 (setq python-shell-interpreter "/usr/bin/python3")
 
