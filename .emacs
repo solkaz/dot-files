@@ -79,6 +79,9 @@
 
 (add-hook 'c++-mode-hook #'subword-mode)
 
+;;; I like playing with fire (also makes editing dotfiles less annoying)
+(setq vc-follow-symlinks t)
+
 (defun open-init-file ()
   "Open the init file."
   (interactive)
