@@ -36,6 +36,10 @@
   (setq inferior-js-program-command "node")
   (setq inferior-js-program-arguments '("--interactive")))
 
+(use-package bool-flip
+  :config
+  (global-set-key (kbd "C-c b") 'bool-flip-do-flip))
+
 (add-to-list 'default-frame-alist '(font . "Terminus-12"))
 (set-face-attribute 'default t :font "Terminus-12")
 (desktop-save-mode 1)
