@@ -18,3 +18,5 @@ export NVM_LAZY_LOAD=true
 plugins=(nvm zsh-nvm command-not-found common-aliases debian git github \
          history node npm pip python zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
+unsetopt correct_all
+setopt correct
