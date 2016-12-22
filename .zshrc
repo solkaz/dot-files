@@ -12,7 +12,9 @@ source $SH_CONFIG_DIR/aliases.zsh
 
 # Make emacs the default editor
 export EDITOR="emacs"
+export NVM_LAZY_LOAD=true
 
-plugins=(command-not-found common-aliases debian git github \
+
+plugins=(nvm zsh-nvm command-not-found common-aliases debian git github \
          history node npm pip python zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
