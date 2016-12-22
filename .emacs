@@ -77,6 +77,10 @@
 	    (lambda () (setq flycheck-gcc-language-standard "c++11")))
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+(use-package flymake-python-pyflakes
+  :config
+  (add-hook 'python-mode-hook 'flymake-python-pyflakes-load))
+
 (add-hook 'c++-mode-hook #'subword-mode)
 
 ;;; I like playing with fire (also makes editing dotfiles less annoying)
