@@ -75,3 +75,7 @@ function caps_to_ctrl() {
     setxkbmap -option ctrl:nocaps
     return 0
 }
+
+function correct-monitor() {
+    xrandr --output VGA-1 --left-of DVI-I-1 --rotate left
+}

@@ -14,9 +14,24 @@ source $SH_CONFIG_DIR/aliases.zsh
 export EDITOR="emacs"
 export NVM_LAZY_LOAD=true
 
+export PROG_DIR=$HOME/Programming
+export GOPATH=$PROG_DIR/golang
 
-plugins=(nvm zsh-nvm command-not-found common-aliases debian git github \
-         history node npm pip python zsh-syntax-highlighting)
+export PATH=$PATH:$GOPATH/bin
+
+plugins=(nvm \
+	     zsh-nvm \
+	     command-not-found \
+	     common-aliases \
+	     debian \
+	     git \
+	     github \
+             history \
+	     node \
+	     npm \
+	     pip \
+	     python \
+	     zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 setopt correct
