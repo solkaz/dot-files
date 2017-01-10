@@ -16,7 +16,6 @@ export NVM_LAZY_LOAD=true
 
 export PROG_DIR=$HOME/Programming
 export GOPATH=$PROG_DIR/golang
-
 export PATH=$PATH:$GOPATH/bin
 
 plugins=(nvm \
@@ -31,6 +30,7 @@ plugins=(nvm \
 	     npm \
 	     pip \
 	     python \
+	     zsh-better-npm-completion \
 	     zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
