@@ -1,3 +1,5 @@
+source ~/Config/.zshenv
+
 ZSH_THEME="rkj-repos"
 HYPHEN_INSENSITIVE="true"
 ENABLE_CORRECTION="true"

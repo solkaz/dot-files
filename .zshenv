@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/solkaz/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 # Make emacs the default editor
 export EDITOR="emacs"
 export NVM_LAZY_LOAD=true
