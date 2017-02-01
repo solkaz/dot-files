@@ -2,7 +2,7 @@
 	email = jheld135@gmail.com
 	name = JMH
 [push]
-	default = matching
+	default = current
 
 [core]
 	excludesfile = ~/.gitignore
