@@ -14,8 +14,17 @@
 
 (require 'use-package)
 
+(use-package helm
+  :config
+  (helm-mode 1)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-x b") 'helm-mini)
+  (global-set-key (kbd "C-c h o") 'helm-occur))
+
 (use-package js
   :config
+  (setq js-indent-level 2)
   (define-key js-mode-map (kbd "C-c C-c") 'comment-region))
 
 (use-package ido
@@ -40,14 +49,10 @@
   :config
   (global-set-key (kbd "C-c b") 'bool-flip-do-flip))
 
-(use-package helm
-  :config
-  (helm-mode 1)
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files))
+(use-package react-snippets)
 
-(add-to-list 'default-frame-alist '(font . "Terminus-12"))
-(set-face-attribute 'default t :font "Terminus-12")
+(add-to-list 'default-frame-alist '(font . "Terminus-14"))
+(set-face-attribute 'default t :font "Terminus-14")
 (desktop-save-mode 1)
 (delete-selection-mode 1)
 (electric-pair-mode t)
@@ -100,3 +105,18 @@
 (load-theme 'alect-black-alt t)
 (provide '.emacs)
 ;;; .emacs ends here
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (helm-mode-manager yaml-mode use-package react-snippets pdf-tools magit json-mode js-comint jedi helm google-this go-mode flymake-python-pyflakes flycheck elpy doom-themes bool-flip alect-themes))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
