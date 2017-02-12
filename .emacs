@@ -40,6 +40,12 @@
   :config
   (global-set-key (kbd "C-c b") 'bool-flip-do-flip))
 
+(use-package helm
+  :config
+  (helm-mode 1)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files))
+
 (add-to-list 'default-frame-alist '(font . "Terminus-12"))
 (set-face-attribute 'default t :font "Terminus-12")
 (desktop-save-mode 1)
