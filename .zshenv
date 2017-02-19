@@ -8,6 +8,8 @@ export PROG_DIR=$HOME/Programming
 export CONFIG_DIR=$HOME/Config
 
 export GOPATH=$PROG_DIR/golang
+export GOBIN=$GOPATH/binx
+export GOPROJECTS=$GOPATH/src/github.com/solkaz
 export PYENV_ROOT=$HOME/.pyenv
 
 
