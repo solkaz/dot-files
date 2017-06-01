@@ -91,3 +91,5 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_historyt
+
+.zshenv-local
