@@ -1,8 +1,5 @@
-;;; package --- Summary
-;;; Commentary:
 (require 'package)
 
-;;; Code:
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
@@ -12,7 +9,10 @@
 
 (package-initialize)
 
-(require 'use-package)
+(when (require 'use-package nil 'noerror)
+  (package-install 'use-package))
+
+(desktop-save-mode 1)
 
 (use-package helm
   :config
@@ -21,11 +21,6 @@
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-c h o") 'helm-occur))
-
-(use-package js
-  :config
-  (setq js-indent-level 2)
-  (define-key js-mode-map (kbd "C-c C-c") 'comment-region))
 
 (use-package ido
   :config
@@ -36,87 +31,39 @@
   (google-this-mode 1)
   (global-set-key (kbd "C-x g") 'google-this-mode-submap))
 
-(use-package elpy
-  :config
-  (elpy-enable))
-
-(use-package js-comint
-  :config
-  (setq inferior-js-program-command "node")
-  (setq inferior-js-program-arguments '("--interactive")))
-
 (use-package bool-flip
   :config
   (global-set-key (kbd "C-c b") 'bool-flip-do-flip))
 
-(use-package react-snippets)
+(use-package yasnippet
+  :config
+  (yas-global-mode t))
 
-(add-to-list 'default-frame-alist '(font . "Terminus-14"))
-(set-face-attribute 'default t :font "Terminus-14")
-(desktop-save-mode 1)
-(delete-selection-mode 1)
 (electric-pair-mode t)
 (show-paren-mode 1)
-(column-number-mode t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
 (setq inhibit-startup-message t)
-
-(setq c-default-style "stroustrup"
-      c-basic-offset 4)
-
-(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
-
-(setq python-shell-interpreter "/usr/bin/python3")
-
+(column-number-mode t)
+(setq vc-follow-symlinks t)
+(setq blink-cursor-mode nil)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+(setq create-lockfiles nil)
+
+(load-theme 'tango-dark t)
 
 
-(c-set-offset 'case-label '+)
+(if window-system
+    (tool-bar-mode 0))
 
-(setq backup-directory-alist `(("." . "~/.saves")))
-(setq backup-by-copying t)
-(setq delete-old-versions t
-      kept-new-versions 6
-      kept-old-versions 6
-      version-control t)
+(if window-system
+    (scroll-bar-mode -1))
 
-(use-package flycheck
+(add-hook 'after-init-hook 'global-company-mode)
+;; (add-to-list 'company-backends 'company-elm)
+
+(use-package smart-tabs-mode
   :config
-  (add-hook 'c++-mode-hook
-	    (lambda () (setq flycheck-gcc-language-standard "c++11")))
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  (setq-default indent-tabs-mode nil)
+  (smart-tabs-insinuate 'c 'javascript))
 
-(use-package flymake-python-pyflakes
-  :config
-  (add-hook 'python-mode-hook 'flymake-python-pyflakes-load))
-
-(add-hook 'c++-mode-hook #'subword-mode)
-
-;;; I like playing with fire (also makes editing dotfiles less annoying)
-(setq vc-follow-symlinks t)
-
-(defun open-init-file ()
-  "Open the init file."
-  (interactive)
-  (find-file user-init-file))
-
-(load-theme 'alect-black-alt t)
 (provide '.emacs)
-;;; .emacs ends here
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (helm-mode-manager yaml-mode use-package react-snippets pdf-tools magit json-mode js-comint jedi helm google-this go-mode flymake-python-pyflakes flycheck elpy doom-themes bool-flip alect-themes))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
