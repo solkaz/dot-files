@@ -2,7 +2,6 @@
 export ZSH=~/.oh-my-zsh
 # Make emacs the default editor
 export EDITOR="emacs"
-export NVM_LAZY_LOAD=true
 
 export PROG_DIR=$HOME/Programming
 export CONFIG_DIR=$HOME/Config
