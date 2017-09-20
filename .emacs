@@ -63,6 +63,22 @@
   :ensure t
   :config (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
+(defun inferior-js-mode-hook-setup ()
+  "Better output for js-comint."
+  (add-hook 'comint-output-filter-functions 'js-comint-process-output))
+
+(use-package js-comint
+  :ensure t
+  :config
+  (add-hook 'inferior-js-mode-hook 'inferior-js-mode-hook-setup t)
+  (add-hook 'js2-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-x C-e") 'js-send-last-sexp)
+            (local-set-key (kbd "C-M-x") 'js-send-last-sexp-and-go)
+            (local-set-key (kbd "C-c b") 'js-send-buffer)
+            (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
+            (local-set-key (kbd "C-c l") 'js-load-file-and-go))))
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
@@ -80,6 +96,23 @@
                            "--trailing-comma" "es5")
         ))
 
+(defun setup-tide-mode ()
+  "Set up Tide mode."
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save-mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+(use-package tide
+  :ensure t
+  :config
+  (setq company-tooltip-align-annotations t)
+  (add-hook 'before-save-hook 'tide-format-before-save)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode))
+
 (electric-pair-mode t)
 (show-paren-mode 1)
 (setq inhibit-startup-message t)
@@ -90,6 +123,8 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (setq create-lockfiles nil)
+(setq delete-selection-mode t)
+(setq dired-use-ls-dired nil)
 
 (load-theme 'tango-dark t)
 
