@@ -79,6 +79,13 @@
             (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
             (local-set-key (kbd "C-c l") 'js-load-file-and-go))))
 
+(use-package slime
+  :ensure t
+  :config
+  (setq slime-lisp-implementations '((sbcl ("sbcl" "--core" "/users/solkaz/sbcl.core-for-slime"))))
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  (setq slime-contribs '(slime-fancy)))
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
