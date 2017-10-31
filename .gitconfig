@@ -9,3 +9,4 @@
 	editor = vim
 [alias]
 	git = !exec git
+	undo = checkout HEAD --
