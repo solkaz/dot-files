@@ -7,3 +7,5 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
+[alias]
+	git = !exec git
