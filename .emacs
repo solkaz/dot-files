@@ -9,7 +9,7 @@
 
 (package-initialize)
 
-(when (require 'use-package nil 'noerror)
+(unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
 (desktop-save-mode 1)
@@ -61,7 +61,7 @@
 
 (use-package js2-mode
   :ensure t
-  :config (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+	:mode (("\\.js\\'" . js2-mode)))
 
 (defun inferior-js-mode-hook-setup ()
   "Better output for js-comint."
@@ -82,7 +82,7 @@
 (use-package slime
   :ensure t
   :config
-  (setq slime-lisp-implementations '((sbcl ("sbcl" "--core" "/users/solkaz/sbcl.core-for-slime"))))
+  (setq slime-lisp-implementations '((sbcl ("sbcl" "--no-userinit" "--core" "/users/solkaz/sbcl.core-for-slime"))))
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
   (setq slime-contribs '(slime-fancy)))
 
@@ -92,7 +92,9 @@
 
 (use-package exec-path-from-shell
   :ensure t
-  :init (exec-path-from-shell-initialize))
+  :init
+  (setq exec-path-from-shell-check-startup-files nil)
+  (exec-path-from-shell-initialize))
 
 (use-package prettier-js
   :ensure t
@@ -120,6 +122,13 @@
   (add-hook 'before-save-hook 'tide-format-before-save)
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
+(use-package magit
+	:ensure t)
+
+(use-package org-bullets
+  :ensure t
+  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
 (electric-pair-mode t)
 (show-paren-mode 1)
 (setq inhibit-startup-message t)
@@ -130,10 +139,19 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (setq create-lockfiles nil)
-(setq delete-selection-mode t)
+(delete-selection-mode 1)
+(global-subword-mode 1)
 (setq dired-use-ls-dired nil)
 
-(load-theme 'tango-dark t)
+(use-package web-mode
+  :ensure t
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
+
+(use-package nord-theme
+  :ensure t
+  :config
+  (load-theme 'nord t))
 
 (if window-system
     (tool-bar-mode 0))
@@ -141,25 +159,12 @@
 (if window-system
     (scroll-bar-mode -1))
 
+(setq backup-directory-alist `(("." . "~/.saves")))
+
 (add-hook 'after-init-hook 'global-company-mode)
 ;; (add-to-list 'company-backends 'company-elm)
 
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file)
+
 (provide '.emacs)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (js-comint helm-dash prettier-js npm-mode github-clone flycheck exec-path-from-shell nov flymd-flyit smart-tabs-mode flymd markdown-mode bool-flip yaml-mode use-package ng2-mode js2-refactor helm go-mode elm-mode company)))
- '(standard-indent 2)
- '(tab-always-indent nil)
- '(tab-stop-list (quote (0 2)))
- '(tab-width 2))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
