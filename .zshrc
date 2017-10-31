@@ -14,8 +14,6 @@ plugins=(nvm \
              history \
 	     node \
 	     npm \
-	     pip \
-	     python \
 	     zsh-better-npm-completion \
 	     zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
