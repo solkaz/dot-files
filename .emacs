@@ -118,7 +118,8 @@
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 (use-package magit
-	:ensure t)
+	:ensure t
+  :bind ("C-x g" . magit-status))
 
 (use-package org-bullets
   :ensure t
