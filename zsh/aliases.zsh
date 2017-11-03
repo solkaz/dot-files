@@ -1,6 +1,3 @@
-# Easy virtualenv activation
-alias sv="source venv/bin/activate"
-
 # Search ALL the aliases
 alias asrch="alias | grep"
 
