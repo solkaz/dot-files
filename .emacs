@@ -54,11 +54,6 @@
 (use-package flymd
   :ensure t)
 
-(use-package nov
-  :ensure t
-  :config
-  (push '("\\.epub\\'" . nov-mode) auto-mode-alist))
-
 (use-package js2-mode
   :ensure t
 	:mode (("\\.js\\'" . js2-mode)))
