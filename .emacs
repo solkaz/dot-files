@@ -150,11 +150,11 @@
 (setq ring-bell-function 'ignore)
 (setq scroll-conservatively 100)
 
-(if window-system
-    (tool-bar-mode 0))
-
-(if window-system
-    (scroll-bar-mode -1))
+(when window-system
+  (progn 
+    (tool-bar-mode 0)
+    (scroll-bar-mode -1)
+    (global-hl-line-mode)))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
