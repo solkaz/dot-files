@@ -1,22 +1,3 @@
-function qemacs () {
-    /usr/bin/emacs -nw -Q "$@"
-}
-
-# If emacs is invoked in the terminal, a new window isn't created
-# nor does it load a desktop session
-function temacs () {
-    /usr/bin/emacs -nw --no-desktop "$@"
-}
-
-function reload-alias () {
-    source $SH_CONFIG_DIR/aliases/"$1".zsh
-    return $?
-}
-
-function woman () {
-    qemacs --eval "(woman \"$1\")"
-}
-
 function mcd() {
     # Make a new directory and cd into it
     if [ -z "$1" ]
@@ -31,24 +12,6 @@ function mcd() {
 	else
 	    echo "$new_dir already exists"
 	    return 1
-	fi
-    fi
-    return 0
-}
-
-function new_cpp() {
-    if [ -z "$1" ]
-    then
-	echo "missing project name"
-	return 1
-    else
-	mcd $1
-	if [ $? -eq 0 ]
-	then
-	    mkdir src include
-	    cp ~/Templates/Makefile ./Makefile
-	    cp ~/Templates/main.cpp src/main.cpp
-	    cd ..
 	fi
     fi
     return 0
