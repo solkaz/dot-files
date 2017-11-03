@@ -123,7 +123,7 @@
 
 (use-package org-bullets
   :ensure t
-  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :config (add-hook 'org-mode-hook #'org-bullets-mode))
 
 (use-package web-mode
   :ensure t
