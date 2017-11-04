@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+# Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 # Make emacs the default editor
 export EDITOR="emacs"
