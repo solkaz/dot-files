@@ -6,7 +6,8 @@ alias rzsh="source ~/.zshrc"
 
 alias sme="source-map-explorer"
 
-for alias_file in $SH_CONFIG_DIR/aliases/*.zsh
-do
-    source $alias_file
-done
+# Git aliases
+alias gai="git add -i"  # Interactive add
+alias gbd="git branch -d"  # Delete branch
+alias gbrd="git branch -rd"  # Delete remote branch
+

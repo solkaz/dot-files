@@ -1,0 +1,4 @@
+^zsh/\.zshenv_local
+^zsh/\functions.zsh
+^zsh/\aliases.zsh
+^zsh/\aliases

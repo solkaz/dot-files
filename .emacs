@@ -152,7 +152,7 @@
 (setq scroll-conservatively 100)
 
 (when window-system
-  (progn 
+  (progn
     (tool-bar-mode 0)
     (scroll-bar-mode -1)
     (global-hl-line-mode)))

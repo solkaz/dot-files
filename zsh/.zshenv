@@ -4,14 +4,15 @@ export ZSH=~/.oh-my-zsh
 export EDITOR="emacs"
 
 export PROG_DIR=$HOME/Programming
-export CONFIG_DIR=$HOME/Config
+export DOTFILES=$HOME/dotfiles
 
-export SH_CONFIG_DIR=$CONFIG_DIR/zsh
+export SH_CONFIG_DIR=$DOTFILES/zsh
 source $SH_CONFIG_DIR/functions.zsh
 source $SH_CONFIG_DIR/aliases.zsh
 
-if [[ -f $CONFIG_DIR/.zshenv_local ]]; then
-    source $CONFIG_DIR/.zshenv_local
+# Load local zshenv, if it exists 
+if [[ -f $SH_CONFIG_DIR/.zshenv_local ]]; then
+    source $SH_CONFIG_DIR/.zshenv_local
 fi
 unsetopt correct_all
 setopt correct
