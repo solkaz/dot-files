@@ -147,6 +147,8 @@
   :ensure t
   :config
   (load-theme 'nord t))
+(setq ring-bell-function 'ignore)
+(setq scroll-conservatively 100)
 
 (if window-system
     (tool-bar-mode 0))
