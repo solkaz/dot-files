@@ -124,6 +124,16 @@
   :ensure t
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+(use-package web-mode
+  :ensure t
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
+
+(use-package nord-theme
+  :ensure t
+  :config
+  (load-theme 'nord t))
+
 (electric-pair-mode t)
 (show-paren-mode 1)
 (setq inhibit-startup-message t)
@@ -137,16 +147,6 @@
 (delete-selection-mode 1)
 (global-subword-mode 1)
 (setq dired-use-ls-dired nil)
-
-(use-package web-mode
-  :ensure t
-  :config
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
-
-(use-package nord-theme
-  :ensure t
-  :config
-  (load-theme 'nord t))
 (setq ring-bell-function 'ignore)
 (setq scroll-conservatively 100)
 
