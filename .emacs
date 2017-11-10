@@ -154,8 +154,7 @@
 (when window-system
   (progn
     (tool-bar-mode 0)
-    (scroll-bar-mode -1)
-    (global-hl-line-mode)))
+    (scroll-bar-mode -1)))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
