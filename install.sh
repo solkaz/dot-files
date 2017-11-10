@@ -7,3 +7,5 @@ fi
 # Install dotfiles
 stow git
 stow tmux
+stow emacs
+stow vim
