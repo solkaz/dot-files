@@ -10,3 +10,4 @@
 [alias]
 	git = !exec git
 	undo = checkout HEAD --
+  undo-commit = reset HEAD~
