@@ -135,6 +135,13 @@
   :config
   (load-theme 'nord t))
 
+(use-package sicp
+  :ensure t)
+
+(use-package indent-info-mode
+  :ensure t
+  :config (global-indent-info-mode +1))
+
 (use-package fireplace
   :ensure t)
 
@@ -155,6 +162,13 @@
 (setq scroll-conservatively 100)
 
 (global-unset-key (kbd "s-t"))
+
+(defun solkaz/generate-md-buffer ()
+  "Generate a scratch buffer in gfm-mode."
+  (interactive)
+  (switch-to-buffer (generate-new-buffer "*md-scratch*"))
+  (gfm-mode))
+
 (when window-system
   (progn
     (tool-bar-mode 0)
