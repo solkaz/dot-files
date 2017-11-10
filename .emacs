@@ -135,6 +135,9 @@
   :config
   (load-theme 'nord t))
 
+(use-package fireplace
+  :ensure t)
+
 (electric-pair-mode t)
 (show-paren-mode 1)
 (setq inhibit-startup-message t)
