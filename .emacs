@@ -151,6 +151,7 @@
 (setq ring-bell-function 'ignore)
 (setq scroll-conservatively 100)
 
+(global-unset-key (kbd "s-t"))
 (when window-system
   (progn
     (tool-bar-mode 0)
