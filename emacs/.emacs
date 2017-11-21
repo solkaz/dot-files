@@ -168,6 +168,7 @@
 (setq scroll-conservatively 100)
 
 (global-unset-key (kbd "s-t"))
+(global-unset-key (kbd "<C-down-mouse-1>"))
 
 (defun solkaz/generate-md-buffer ()
   "Generate a scratch buffer in gfm-mode."
