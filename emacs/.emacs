@@ -76,6 +76,7 @@
 
 (use-package slime
   :ensure t
+  :no-require t
   :config
   (setq slime-lisp-implementations '((sbcl ("sbcl" "--no-userinit" "--core" "/users/solkaz/sbcl.core-for-slime"))))
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
