@@ -143,6 +143,11 @@
   :ensure t
   :config (global-indent-info-mode +1))
 
+(use-package easy-kill
+  :ensure t
+  :config
+  (global-set-key [remap kill-ring-save] 'easy-kill))
+
 (use-package fireplace
   :ensure t)
 
