@@ -8,12 +8,18 @@ plugins=(nvm \
        zsh-nvm \
        command-not-found \
        common-aliases \
-       debian \
        git \
        github \
        history \
        node \
        npm \
-       zsh-better-npm-completion \
-       zsh-syntax-highlighting)
+       yarn)
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    plugins+=(osx)
+elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
+    plugins+=(debian)
+fi
+
+plugins+=(zsh-better-npm-completion zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
