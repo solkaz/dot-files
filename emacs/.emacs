@@ -126,11 +126,6 @@
   :ensure t
   :config (add-hook 'org-mode-hook #'org-bullets-mode))
 
-(use-package web-mode
-  :ensure t
-  :config
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
-
 (use-package nord-theme
   :ensure t
   :config
