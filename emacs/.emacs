@@ -87,6 +87,7 @@
   :init (global-flycheck-mode))
 
 (use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
   :ensure t
   :init
   (setq exec-path-from-shell-check-startup-files nil)
