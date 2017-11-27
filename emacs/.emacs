@@ -136,6 +136,10 @@
 (use-package sicp
   :ensure t)
 
+(use-package github-notifier
+  :ensure t
+  :config (github-notifier-mode +1))
+
 (use-package indent-info
   :ensure t
   :config (global-indent-info-mode +1))
