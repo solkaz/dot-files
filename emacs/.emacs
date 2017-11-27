@@ -136,7 +136,7 @@
 (use-package sicp
   :ensure t)
 
-(use-package indent-info-mode
+(use-package indent-info
   :ensure t
   :config (global-indent-info-mode +1))
 
