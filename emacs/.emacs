@@ -167,6 +167,10 @@
 (global-unset-key (kbd "s-t"))
 (global-unset-key (kbd "s-q"))
 (global-unset-key (kbd "<C-down-mouse-1>"))
+(global-set-key (kbd "C-a") 'back-to-indentation)
+(global-set-key (kbd "M-m") 'move-beginning-of-line)
+(global-set-key (kbd "C-c r") 'query-replace)
+(global-set-key (kbd "C-c R") 'query-replace-regexp)
 
 (defun solkaz/generate-md-buffer ()
   "Generate a scratch buffer in gfm-mode."
