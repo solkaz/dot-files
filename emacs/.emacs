@@ -164,6 +164,27 @@
 (setq ring-bell-function 'ignore)
 (setq scroll-conservatively 100)
 
+
+(defun solkaz/generate-md-buffer ()
+  "Generate a scratch buffer in gfm-mode."
+  (interactive)
+  (switch-to-buffer (generate-new-buffer "*md-scratch*"))
+  (gfm-mode))
+
+(defun solkaz/surround (begin end char)
+  "Put CHAR at START and END of the region."
+  (interactive  "r\nsChar to Insert: ")
+  (save-excursion
+    (goto-char end)
+    (insert char)
+    (goto-char begin)
+    (insert char)))
+
+(defun solkaz/open-dotfiles ()
+  "Open my dotfiles directory in dired."
+  (interactive)
+  (dired "~/dotfiles"))
+
 (global-unset-key (kbd "s-t"))
 (global-unset-key (kbd "s-q"))
 (global-unset-key (kbd "<C-down-mouse-1>"))
@@ -171,12 +192,7 @@
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 (global-set-key (kbd "C-c r") 'query-replace)
 (global-set-key (kbd "C-c R") 'query-replace-regexp)
-
-(defun solkaz/generate-md-buffer ()
-  "Generate a scratch buffer in gfm-mode."
-  (interactive)
-  (switch-to-buffer (generate-new-buffer "*md-scratch*"))
-  (gfm-mode))
+(global-set-key (kbd "C-c s") 'solkaz/surround)
 
 (when window-system
   (progn
