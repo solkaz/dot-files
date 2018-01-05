@@ -193,6 +193,7 @@
 (global-set-key (kbd "C-c r") 'query-replace)
 (global-set-key (kbd "C-c R") 'query-replace-regexp)
 (global-set-key (kbd "C-c s") 'solkaz/surround)
+(global-set-key (kbd "C-c e") 'eshell)
 (global-set-key (kbd "C-x D") 'solkaz/open-dotfiles)
 
 (when window-system
