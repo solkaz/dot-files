@@ -9,6 +9,7 @@ stow git
 stow tmux
 stow emacs
 stow vim
+stow zsh
 
 # I like to host programming stuff in ~/Programming
 mkdir ~/Programming
