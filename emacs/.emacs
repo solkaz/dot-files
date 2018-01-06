@@ -23,11 +23,6 @@
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-c h o") 'helm-occur))
 
-(use-package helm-dash
-  :ensure t
-  :config
-  (setq helm-dash-browser-func 'eww))
-
 (use-package ido
   :ensure t
   :config
