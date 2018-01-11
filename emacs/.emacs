@@ -180,6 +180,7 @@
   (interactive)
   (dired "~/dotfiles"))
 
+;; Keybinds
 (global-unset-key (kbd "s-t"))
 (global-unset-key (kbd "s-q"))
 (global-unset-key (kbd "<C-down-mouse-1>"))
@@ -189,7 +190,7 @@
 (global-set-key (kbd "C-c R") 'query-replace-regexp)
 (global-set-key (kbd "C-c s") 'solkaz/surround)
 (global-set-key (kbd "C-c e") 'eshell)
-(global-set-key (kbd "C-x D") 'solkaz/open-dotfiles)
+(global-set-key (kbd "C-c d") 'solkaz/open-dotfiles)
 
 (when window-system
   (progn
