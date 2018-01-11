@@ -191,6 +191,8 @@
 (global-set-key (kbd "C-c s") 'solkaz/surround)
 (global-set-key (kbd "C-c e") 'eshell)
 (global-set-key (kbd "C-c d") 'solkaz/open-dotfiles)
+(global-set-key (kbd "C-c l") 'list-packages)
+(global-set-key (kbd "C-c p") 'pop-to-buffer)
 
 (when window-system
   (progn
