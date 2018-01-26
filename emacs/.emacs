@@ -45,6 +45,10 @@
   :config
   (yas-global-mode t))
 
+(use-package yasnippet-snippets
+  :ensure t
+  :after (yasnippet))
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
