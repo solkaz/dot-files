@@ -107,12 +107,9 @@
 
 (use-package prettier-js
   :ensure t
+  :hook (j2-mode j2-jsx-mode)
   :config
-  (add-hook 'j2-mode-hook 'prettier-js-mode)
-  (setq prettier-js-args '(
-                           "--single-quote"
-                           "--trailing-comma" "es5")
-        ))
+  (setq prettier-js-args '("--single-quote" "--trailing-comma" "es5")))
 
 (defun setup-tide-mode ()
   "Set up Tide mode."
@@ -137,7 +134,7 @@
 
 (use-package org-bullets
   :ensure t
-  :config (add-hook 'org-mode-hook #'org-bullets-mode))
+  :hook (org-mode . org-bullets-mode))
 
 (use-package nord-theme
   :ensure t
