@@ -28,6 +28,18 @@
   :config
   (ido-mode t))
 
+(use-package ido-vertical-mode
+  :ensure t
+  :after (ido)
+  :config
+  (ido-vertical-mode 1)
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+
+(use-package ido-yes-or-no
+  :ensure t
+  :after (ido)
+  :config (ido-yes-or-no-mode 1))
+
 (use-package yasnippet
   :ensure t
   :config
