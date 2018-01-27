@@ -191,7 +191,7 @@
 (defun solkaz/open-dotfiles ()
   "Open my dotfiles directory in dired."
   (interactive)
-  (dired "~/dotfiles"))
+  (dired "~/dot-files"))
 
 ;; Keybinds
 (global-unset-key (kbd "s-t"))
@@ -205,6 +205,7 @@
 (global-set-key (kbd "C-c e") 'eshell)
 (global-set-key (kbd "C-c d") 'solkaz/open-dotfiles)
 (global-set-key (kbd "C-c l") 'list-packages)
+(global-set-key (kbd "C-c w") 'whitespace-mode)
 (global-set-key (kbd "C-c p") 'pop-to-buffer)
 
 (when window-system
