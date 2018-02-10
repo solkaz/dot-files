@@ -49,6 +49,10 @@
   :ensure t
   :after (yasnippet))
 
+(use-package common-lisp-snippets
+  :ensure t
+  :after (yasnippet))
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -67,8 +71,9 @@
 
 (use-package js2-mode
   :ensure t
-	:mode (("\\.js\\'" . js2-mode)
-         ("\\.jsx\\'" . js2-jsx-mode)))
+  :mode
+  (("\\.js\\'" . js2-mode)
+   ("\\.jsx\\'" . js2-jsx-mode)))
 
 (defun inferior-js-mode-hook-setup ()
   "Better output for js-comint."
