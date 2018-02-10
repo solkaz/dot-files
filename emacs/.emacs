@@ -161,7 +161,7 @@
 (setq inhibit-startup-message t)
 (column-number-mode t)
 (setq vc-follow-symlinks t)
-(setq blink-cursor-mode nil)
+(blink-cursor-mode 0)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
