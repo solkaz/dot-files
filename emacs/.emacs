@@ -53,7 +53,9 @@
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "C-c h x") 'helm-register)
   (global-set-key (kbd "C-c h o") 'helm-occur)
-  (global-set-key (kbd "M-y") 'helm-show-kill-ring))
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+  (add-to-list 'helm-boring-buffer-regexp-list "\`\*magit\-")
+  (add-to-list 'helm-boring-buffer-regexp-list "\`\*tide"))
 
 (use-package projectile
   :ensure t
