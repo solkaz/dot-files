@@ -12,10 +12,35 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(setq use-package-always-ensure t)
+
+(require 'use-package)
+
 (desktop-save-mode 1)
+
+(defmacro diminish-minor-mode (filename mode &optional abbrev)
+  `(eval-after-load (symbol-name ,filename)
+     '(diminish ,mode ,abbrev)))
+
+(defmacro diminish-major-mode (mode-hook abbrev)
+  `(add-hook ,mode-hook
+             (lambda () (setq mode-name ,abbrev))))
+
+(use-package diminish
+  :ensure t
+  :config
+  (diminish-minor-mode 'eldoc 'eldoc-mode)
+  (diminish-minor-mode 'subword 'subword-mode)
+  (diminish-major-mode 'emacs-lisp-mode-hook "el")
+  (diminish-minor-mode 'company 'company-mode))
 
 (use-package helm
   :ensure t
+  :diminish helm-mode
+q  :init
+  (setq helm-M-x-fuzzy-match t
+        helm-buffers-fuzzy-matching t
+        helm-recentf-fuzzy-match t)
   :config
   (helm-mode 1)
   (global-set-key (kbd "M-x") 'helm-M-x)
@@ -27,10 +52,15 @@
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "C-c h x") 'helm-register)
   (global-set-key (kbd "C-c h o") 'helm-occur)
-  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (setq helm-M-x-fuzzy-match t
-        helm-buffers-fuzzy-matching t
-        helm-recentf-fuzzy-match t))
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring))
+
+(use-package projectile
+  :ensure t
+  :diminish)
+
+(use-package powerline
+  :ensure t
+  :config (powerline-default-theme))
 
 (use-package ido
   :ensure t
@@ -51,6 +81,7 @@
 
 (use-package yasnippet
   :ensure t
+  :diminish yas-minor-mode
   :config
   (yas-global-mode t))
 
@@ -82,7 +113,10 @@
   :ensure t
   :mode
   (("\\.js\\'" . js2-mode)
-   ("\\.jsx\\'" . js2-jsx-mode)))
+   ("\\.jsx\\'" . js2-jsx-mode))
+  :config
+  (diminish-major-mode 'js2-mode-hook "js")
+  (diminish-major-mode 'js2-jsx-mode-hook "jsx"))
 
 (defun inferior-js-mode-hook-setup ()
   "Better output for js-comint."
@@ -111,6 +145,7 @@
 
 (use-package flycheck
   :ensure t
+  :diminish
   :init (global-flycheck-mode))
 
 (use-package exec-path-from-shell
@@ -121,6 +156,7 @@
 
 (use-package prettier-js
   :ensure t
+  :diminish
   :hook (j2-mode j2-jsx-mode)
   :config
   (setq prettier-js-args '("--single-quote" "--trailing-comma" "es5")))
@@ -137,13 +173,15 @@
 
 (use-package tide
   :ensure t
+  :diminish
   :config
+  (diminish-major-mode 'typescript-mode-hook "ts")
   (setq company-tooltip-align-annotations t)
   (add-hook 'before-save-hook 'tide-format-before-save)
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 (use-package magit
-	:ensure t
+  :ensure t
   :bind ("C-x g" . magit-status))
 
 (use-package org-bullets
@@ -221,6 +259,10 @@
 (global-set-key (kbd "C-c l") 'list-packages)
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (global-set-key (kbd "C-c p") 'pop-to-buffer)
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "C-x k") (lambda () (interactive) (kill-buffer (current-buffer))))
+
+(add-hook 'help-mode-hook (lambda () (pop-to-buffer "*Help*")))
 
 (when window-system
   (progn
