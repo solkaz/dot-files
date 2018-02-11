@@ -32,7 +32,8 @@
   (diminish-minor-mode 'eldoc 'eldoc-mode)
   (diminish-minor-mode 'subword 'subword-mode)
   (diminish-major-mode 'emacs-lisp-mode-hook "el")
-  (diminish-minor-mode 'company 'company-mode))
+  (diminish-minor-mode 'company 'company-mode)
+  (diminish-minor-mode 'autorevert 'auto-revert-mode))
 
 (use-package helm
   :ensure t
