@@ -37,7 +37,7 @@
 (use-package helm
   :ensure t
   :diminish helm-mode
-q  :init
+  :init
   (setq helm-M-x-fuzzy-match t
         helm-buffers-fuzzy-matching t
         helm-recentf-fuzzy-match t)
