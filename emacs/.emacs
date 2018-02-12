@@ -264,6 +264,8 @@
 (global-set-key (kbd "C-c p") 'pop-to-buffer)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-x k") (lambda () (interactive) (kill-buffer (current-buffer))))
+(global-set-key (kbd "<mouse-8>") 'previous-buffer)
+(global-set-key (kbd "<mouse-9>") 'next-buffer)
 
 (add-hook 'help-mode-hook (lambda () (pop-to-buffer "*Help*")))
 
