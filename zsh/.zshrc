@@ -21,5 +21,5 @@ elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     plugins+=(debian)
 fi
 
-plugins+=(zsh-better-npm-completion zsh-syntax-highlighting)
+plugins+=(zsh-autosuggestions zsh-better-npm-completion zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
