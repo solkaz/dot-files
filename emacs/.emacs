@@ -61,6 +61,10 @@
   :ensure t
   :diminish)
 
+(use-package helm-projectile
+  :ensure t
+  :config (helm-projectile-on))
+
 (use-package powerline
   :ensure t
   :config (powerline-default-theme))
