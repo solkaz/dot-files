@@ -266,8 +266,6 @@
 (global-set-key (kbd "<mouse-8>") 'previous-buffer)
 (global-set-key (kbd "<mouse-9>") 'next-buffer)
 
-(add-hook 'help-mode-hook (lambda () (pop-to-buffer "*Help*")))
-
 (when window-system
   (progn
     (tool-bar-mode 0)
