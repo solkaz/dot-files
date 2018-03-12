@@ -119,11 +119,16 @@
 (use-package js2-mode
   :ensure t
   :mode
-  (("\\.js\\'" . js2-mode)
-   ("\\.jsx\\'" . js2-jsx-mode))
+  (("\\.js\\'" . js2-mode))
   :config
   (diminish-major-mode 'js2-mode-hook "js")
   (diminish-major-mode 'js2-jsx-mode-hook "jsx"))
+
+(use-package rjsx-mode
+  :ensure t
+  :mode (("\\.jsx\\'" . rjsx-mode))
+  :config
+  (diminish-major-mode 'rjsx-mode-hook "jsx"))
 
 (defun inferior-js-mode-hook-setup ()
   "Better output for js-comint."
@@ -238,7 +243,7 @@
   (gfm-mode))
 
 (defun solkaz/surround (begin end char)
-  "Put CHAR at START and END of the region."
+  "Surround region at BEGIN and END with CHAR."
   (interactive  "r\nsChar to Insert: ")
   (save-excursion
     (goto-char end)
