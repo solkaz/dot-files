@@ -226,20 +226,20 @@
 
 (electric-pair-mode t)
 (show-paren-mode 1)
-(setq inhibit-startup-message t)
 (column-number-mode t)
-(setq vc-follow-symlinks t)
 (blink-cursor-mode 0)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
-(setq create-lockfiles nil)
 (delete-selection-mode 1)
 (global-subword-mode 1)
-(setq dired-use-ls-dired nil)
-(setq ring-bell-function 'ignore)
-(setq scroll-conservatively 100)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
+(setq dired-use-ls-dired nil
+      ring-bell-function 'ignore
+      create-lockfiles nil
+      vc-follow-symlinks t
+      inhibit-startup-message t
+      scroll-conservatively 100)
 
 
 (defun solkaz/generate-md-buffer ()
