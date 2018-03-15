@@ -235,6 +235,7 @@
 (setq dired-use-ls-dired nil)
 (setq ring-bell-function 'ignore)
 (setq scroll-conservatively 100)
+(add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
 (defun solkaz/generate-md-buffer ()
