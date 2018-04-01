@@ -222,7 +222,8 @@
   :ensure t)
 
 (use-package rotate
-  :ensure t)
+  :ensure t
+  :bind ("C-c l" . rotate-layout))
 
 (electric-pair-mode t)
 (show-paren-mode 1)
@@ -273,7 +274,6 @@
 (global-set-key (kbd "C-c s") 'solkaz/surround)
 (global-set-key (kbd "C-c e") 'eshell)
 (global-set-key (kbd "C-c d") 'solkaz/open-dotfiles)
-(global-set-key (kbd "C-c l") 'list-packages)
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (global-set-key (kbd "C-c p") 'pop-to-buffer)
 (global-set-key (kbd "M-o") 'other-window)
