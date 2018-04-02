@@ -12,3 +12,5 @@
 	undo = checkout HEAD --
 	undo-commit = reset HEAD~
 	reword = commit --amend
+[github]
+	user = solkaz
