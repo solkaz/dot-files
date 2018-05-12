@@ -4,7 +4,7 @@ export ZSH=~/.oh-my-zsh
 export EDITOR="emacs"
 
 export PROG_DIR=$HOME/Programming
-export DOTFILES=$HOME/dotfiles
+export DOTFILES=$HOME/dot-files
 
 export SH_CONFIG_DIR=$DOTFILES/zsh
 source $SH_CONFIG_DIR/functions.zsh
