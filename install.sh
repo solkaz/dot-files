@@ -5,11 +5,7 @@ if ! [ -x "$(command -v stow)" ]; then
 fi
 
 # Install dotfiles
-stow git
-stow tmux
-stow emacs
-stow vim
-stow zsh
+stow {git,emacs,zsh,vim,tmux} -t ~
 
 # I like to host programming stuff in ~/Programming
 mkdir ~/Programming
