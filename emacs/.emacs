@@ -61,7 +61,9 @@
 (use-package projectile
   :ensure t
   :diminish
-  :config (setq projectile-switch-project-action #'projectile-vc))
+  :config
+  (projectile-global-mode)
+  (setq projectile-switch-project-action #'projectile-vc))
 
 (use-package helm-projectile
   :ensure t
