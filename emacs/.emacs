@@ -73,6 +73,10 @@
   :ensure t
   :config (powerline-default-theme))
 
+(use-package company
+  :ensure t
+  :config (add-hook 'after-init-hook 'global-company-mode))
+
 (use-package ido
   :ensure t
   :config
@@ -276,9 +280,6 @@
     (horizontal-scroll-bar-mode -1)))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
-
-(add-hook 'after-init-hook 'global-company-mode)
-;; (add-to-list 'company-backends 'company-elm)
 
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
