@@ -62,7 +62,9 @@
   :ensure t
   :diminish
   :config
-  (projectile-global-mode)
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-switch-project-action #'projectile-vc))
 
 (use-package helm-projectile
@@ -177,6 +179,7 @@
 (use-package tide
   :ensure t
   :diminish
+  :mode (("\\.tsx\\'" . 'typescript-mode))
   :config
   (diminish-major-mode 'typescript-mode-hook "ts")
   (setq company-tooltip-align-annotations t)
