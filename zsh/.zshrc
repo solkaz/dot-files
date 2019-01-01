@@ -1,25 +1,34 @@
-source ~/.zshenv
+export HYPHEN_INSENSITIVE="true"
+export ENABLE_CORRECTION="true"
 
-ZSH_THEME="rkj-repos"
-HYPHEN_INSENSITIVE="true"
-ENABLE_CORRECTION="true"
-
-plugins=(nvm \
-       zsh-nvm \
-       command-not-found \
-       common-aliases \
-       git \
-       github \
-       history \
-       node \
-       npm \
-       yarn)
-
+source $HOME/antigen.zsh
+    
+# Load the oh-my-zsh's library
+antigen use oh-my-zsh
+    
+antigen bundle nvm
+export NVM_LAZY_LOAD=true
+antigen bundle lukechilds/zsh-nvm
+antigen bundle command-not-found
+antigen bundle common-aliases
+antigen bundle git
+antigen bundle github
+antigen bundle history
+antigen bundle node
+antigen bundle npm
+antigen bundle vscode
+antigen bundle yarn
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle lukechilds/zsh-better-npm-completion
+antigen bundle zsh-users/zsh-completions
 if [[ "$(uname)" == "Darwin" ]]; then
-    plugins+=(osx)
+    antigen bundle osx
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-    plugins+=(debian)
+    antigen bundle debian
 fi
+antigen theme rkj-repos
 
-plugins+=(zsh-autosuggestions zsh-better-npm-completion zsh-syntax-highlighting)
-source $ZSH/oh-my-zsh.sh
+antigen apply
+
+source ~/.zshenv
