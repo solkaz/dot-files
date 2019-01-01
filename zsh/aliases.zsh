@@ -10,4 +10,5 @@ alias sme="source-map-explorer"
 alias gai="git add -i"  # Interactive add
 alias gbd="git branch -d"  # Delete branch
 alias gbrd="git branch -rd"  # Delete remote branch
-
+alias grom="git rebase origin/master"
+alias grc="git rebase --continue"
