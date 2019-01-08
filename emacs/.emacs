@@ -285,6 +285,8 @@
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (setq custom-file "~/.emacs-custom.el")
+(unless (file-exists-p custom-file)
+  (shell-command (concat "touch " custom-file)))
 (load custom-file)
 
 (provide '.emacs)
