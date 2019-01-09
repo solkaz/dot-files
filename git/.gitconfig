@@ -16,3 +16,5 @@
 	user = solkaz
 [credential]
 	helper = store
+[hub]
+	protocol = https
