@@ -96,3 +96,4 @@ jspm_packages
 flymd*
 *.org
 flycheck_.emacs
+.emacs.desktop
