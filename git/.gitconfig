@@ -1,20 +1,19 @@
 [user]
-	email = jheld135@gmail.com
-	name = JMH
+  email = jh.software.developer@gmail.com
+  name = Jeff Held
 [push]
-	default = current
-
+  default = current
 [core]
-	excludesfile = ~/.gitignore
-	editor = vim
+  excludesfile = ~/.gitignore
+  editor = vim
 [alias]
-	git = !exec git
-	undo = checkout HEAD --
-	undo-commit = reset HEAD~
-	reword = commit --amend
+  git = !exec git
+  undo = checkout HEAD --
+  undo-commit = reset HEAD~
+  reword = commit --amend
 [github]
-	user = solkaz
+  user = solkaz
 [credential]
-	helper = store
+  helper = store
 [hub]
-	protocol = https
+  protocol = https
