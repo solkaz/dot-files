@@ -2,6 +2,14 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 set list listchars=tab:→\ ,trail:·
+set mouse=a
+set wildmode=longest,list,full
+set wildmenu
+let mapleader=" "
+nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+colorscheme elflord
+setlocal indentkeys+=0
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -11,12 +19,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
-Plug 'arcticicestudio/nord-vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
 Plug 'bling/vim-airline'
 call plug#end()
 
-colorscheme nord
-setlocal indentkeys+=0
