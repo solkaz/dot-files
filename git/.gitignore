@@ -97,3 +97,4 @@ flymd*
 *.org
 flycheck_.emacs
 .emacs.desktop
+*.swp
