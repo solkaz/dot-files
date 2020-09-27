@@ -19,10 +19,12 @@
 (desktop-save-mode 1)
 
 (defmacro diminish-minor-mode (filename mode &optional abbrev)
+  "After loading FILENAME, diminish MODE to ABBREV (or entirely if ABBREV is not provided)."
   `(eval-after-load (symbol-name ,filename)
      '(diminish ,mode ,abbrev)))
 
 (defmacro diminish-major-mode (mode-hook abbrev)
+  "Diminish MODE-HOOK to ABBREV."
   `(add-hook ,mode-hook
              (lambda () (setq mode-name ,abbrev))))
 
