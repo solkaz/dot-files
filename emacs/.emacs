@@ -73,6 +73,10 @@
   :ensure t
   :config (helm-projectile-on))
 
+(use-package crux
+  :ensure t
+  :bind ("C-c I" . 'crux-find-user-init-file))
+
 (use-package powerline
   :ensure t
   :config (powerline-default-theme))
