@@ -1,0 +1,34 @@
+#+AUTHOR: Jeff Held
+#+TITLE: README
+
+This is where I keep my dot-files.
+
+** Installation
+
+[[https://www.gnu.org/software/stow/][GNU Stow]] is the only requirement for running [[./install.sh][install.sh]]:
+
+#+begin_src sh
+git clone https://github.com/solkaz/dot-files
+cd dot-files
+sh install.sh
+#+end_src
+
+=install.sh= will create symlinks in the home directory to the folders
+in the project, which will be picked up by the programs in
+question. This allows me to have a centralized location that I can
+make changes to my configurations (and track with Git). After running
+the install script for the first time, I don't need to run it again
+unless I change the file structure within this project itself.
+
+** What's configured?
+
+- Emacs
+- Git
+- Tmux
+- Vim
+- Zsh
+
+** License
+
+[[./LICENSE][MIT]]
+
