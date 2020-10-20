@@ -7,5 +7,6 @@ fi
 # Install dotfiles
 stow {git,emacs,zsh,vim,tmux} --dotfiles -t ~
 
-# I like to host programming stuff in ~/Programming
-mkdir ~/Programming
+if [ ! -d ~/Programming ]; then
+    mkdir ~/Programming
+fi
