@@ -305,6 +305,16 @@ Whoa, I can write elisp!
   "Open my dotfiles directory in dired."
   (interactive)
   (dired "~/dot-files"))
+
+; https://stackoverflow.com/a/9697222
+(defun solkaz/comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)))
 #+end_src
 
 * Enabled functions
@@ -324,6 +334,7 @@ Enable some functions that are disabled by default.
 (global-set-key (kbd "M-o") 'other-window)
 (global-unset-key (kbd "s-t"))
 (global-unset-key (kbd "<C-down-mouse-1>"))
+(global-set-key (kbd "s-/") 'solkaz/comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-a") 'back-to-indentation)
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 (global-set-key (kbd "C-c r") 'query-replace)
