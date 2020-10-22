@@ -441,6 +441,22 @@ I use [[https://www.nordtheme.com/ports/emacs/][=nord-theme=]] as my base theme
   :config (powerline-default-theme))
 #+end_src
 
+=emojify= displays emojis :100:. =company-emoji= allows me to write
+emojis more easily :muscle:
+
+#+begin_src emacs-lisp
+(use-package emojify
+  :hook
+  (after-init . global-emojify-mode)
+  :config
+  (setq emojify-company-tooltips-p t))
+
+(use-package company-emoji
+  :after (company)
+  :init
+  (add-to-list 'company-backends 'company-emoji))
+#+end_src
+
 GUI menus take up space. If I am using a windowed system, they should
 be disabled.
 
