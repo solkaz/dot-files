@@ -1,3 +1,5 @@
+source ~/.zshenv
+
 export HYPHEN_INSENSITIVE="true"
 export ENABLE_CORRECTION="true"
 
@@ -22,13 +24,13 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle zsh-users/zsh-completions
+# antigen theme rkj-repos
 if [[ "$(uname)" == "Darwin" ]]; then
     antigen bundle osx
 elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
     antigen bundle debian
 fi
-antigen theme rkj-repos
 
 antigen apply
 
-source ~/.zshenv
+source $SH_CONFIG_DIR/prompt.zsh
