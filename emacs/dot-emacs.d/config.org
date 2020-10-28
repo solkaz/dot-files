@@ -60,7 +60,8 @@ I use =use-package= for managing packages. Most of the setup for it is run in [[
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-switch-project-action #'projectile-vc))
+  (setq projectile-switch-project-action #'projectile-vc
+        projectile-project-search-path '("~/Programming/")))
 
 (use-package helm-projectile
   :config (helm-projectile-on))
