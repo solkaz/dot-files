@@ -17,3 +17,5 @@
   helper = store
 [hub]
   protocol = https
+[pull]
+  rebase = true
