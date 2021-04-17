@@ -324,9 +324,15 @@ Whoa, I can write elisp!
 Enable some functions that are disabled by default.
 
 #+begin_src emacs-lisp
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
+
+  (setq functions-to-enable
+        '(downcase-region upcase-region narrow-to-region))
+
+  (mapc
+   (lambda
+     (func)
+     (put 'func 'disabled nil))
+   functions-to-enable)
 #+end_src
 
 * Keybindings
