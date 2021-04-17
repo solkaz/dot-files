@@ -9,501 +9,501 @@ settings tend to be focused on user interactions (i.e. how I use Emacs).
 
 * =use-package=
 
-I use =use-package= for managing packages. Most of the setup for it is run in [[./init.el][`init.el`]]
+  I use =use-package= for managing packages. Most of the setup for it is run in [[./init.el][`init.el`]]
 
-#+begin_src emacs-lisp
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
-#+end_src
+  #+begin_src emacs-lisp
+    (require 'use-package-ensure)
+    (setq use-package-always-ensure t)
+  #+end_src
 
 * =helm=
 
-=helm= is my main auto-completion framework.
+  =helm= is my main auto-completion framework.
 
-#+begin_src emacs-lisp
-(use-package helm
-  :diminish helm-mode
-  :defines
-  (helm-boring-buffer-regexp-list
-   helm-M-x-fuzzy-match
-   helm-buffers-fuzzy-matching
-   helm-recentf-fuzzy-match)
-  :init
-  (setq helm-M-x-fuzzy-match t
-        helm-buffers-fuzzy-matching t
-        helm-recentf-fuzzy-match t)
-  :config
-  (helm-mode 1)
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-z")  'helm-select-action)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-x b") 'helm-mini)
-  (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
-  (global-set-key (kbd "C-c h x") 'helm-register)
-  (global-set-key (kbd "C-c h o") 'helm-occur)
-  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (add-to-list 'helm-boring-buffer-regexp-list "\`\*magit\-")
-  (add-to-list 'helm-boring-buffer-regexp-list "\`\*tide"))
-#+end_src
+  #+begin_src emacs-lisp
+    (use-package helm
+      :diminish helm-mode
+      :defines
+      (helm-boring-buffer-regexp-list
+       helm-M-x-fuzzy-match
+       helm-buffers-fuzzy-matching
+       helm-recentf-fuzzy-match)
+      :init
+      (setq helm-M-x-fuzzy-match t
+            helm-buffers-fuzzy-matching t
+            helm-recentf-fuzzy-match t)
+      :config
+      (helm-mode 1)
+      (global-set-key (kbd "M-x") 'helm-M-x)
+      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+      (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+      (define-key helm-map (kbd "C-z")  'helm-select-action)
+      (global-set-key (kbd "C-x C-f") 'helm-find-files)
+      (global-set-key (kbd "C-x b") 'helm-mini)
+      (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+      (global-set-key (kbd "C-c h x") 'helm-register)
+      (global-set-key (kbd "C-c h o") 'helm-occur)
+      (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+      (add-to-list 'helm-boring-buffer-regexp-list "\`\*magit\-")
+      (add-to-list 'helm-boring-buffer-regexp-list "\`\*tide"))
+  #+end_src
 
 * =projectile=
 
-=projectile= is used to navigate different projects. Since I'm using
-=helm=, I also use the =helm-projectile= integration.
+  =projectile= is used to navigate different projects. Since I'm using
+  =helm=, I also use the =helm-projectile= integration.
 
-#+begin_src emacs-lisp
-(use-package projectile
-  :diminish
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-switch-project-action #'projectile-vc
-        projectile-project-search-path '("~/Programming/")))
+  #+begin_src emacs-lisp
+    (use-package projectile
+      :diminish
+      :config
+      (projectile-mode +1)
+      (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+      (setq projectile-switch-project-action #'projectile-vc
+            projectile-project-search-path '("~/Programming/")))
 
-(use-package helm-projectile
-  :config (helm-projectile-on))
-#+end_src
+    (use-package helm-projectile
+      :config (helm-projectile-on))
+  #+end_src
 
 * =diminish=
 
-I use =diminish= to make space on modeline
+  I use =diminish= to make space on modeline
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
-(defmacro diminish-minor-mode (filename mode &optional abbrev)
-  "After loading FILENAME, diminish MODE to ABBREV (or entirely if ABBREV is not provided)."
-  `(eval-after-load (symbol-name ,filename)
-     '(diminish ,mode ,abbrev)))
+    (defmacro diminish-minor-mode (filename mode &optional abbrev)
+      "After loading FILENAME, diminish MODE to ABBREV (or entirely if ABBREV is not provided)."
+      `(eval-after-load (symbol-name ,filename)
+         '(diminish ,mode ,abbrev)))
 
-(defmacro diminish-major-mode (mode-hook abbrev)
-  "Diminish MODE-HOOK to ABBREV."
-  `(add-hook ,mode-hook
-             (lambda () (setq mode-name ,abbrev))))
+    (defmacro diminish-major-mode (mode-hook abbrev)
+      "Diminish MODE-HOOK to ABBREV."
+      `(add-hook ,mode-hook
+                 (lambda () (setq mode-name ,abbrev))))
 
-(use-package diminish
-  :config
-  (diminish-minor-mode 'eldoc 'eldoc-mode)
-  (diminish-minor-mode 'subword 'subword-mode)
-  (diminish-major-mode 'emacs-lisp-mode-hook "el")
-  (diminish-minor-mode 'company 'company-mode)
-  (diminish-minor-mode 'autorevert 'auto-revert-mode)
-  (diminish-minor-mode 'hideshow 'hs-minor-mode))
+    (use-package diminish
+      :config
+      (diminish-minor-mode 'eldoc 'eldoc-mode)
+      (diminish-minor-mode 'subword 'subword-mode)
+      (diminish-major-mode 'emacs-lisp-mode-hook "el")
+      (diminish-minor-mode 'company 'company-mode)
+      (diminish-minor-mode 'autorevert 'auto-revert-mode)
+      (diminish-minor-mode 'hideshow 'hs-minor-mode))
 
-#+end_src
+  #+end_src
 
 * =ido=
 
-#+begin_src emacs-lisp
-(use-package ido
-  :config
-  (ido-mode 1))
+  #+begin_src emacs-lisp
+    (use-package ido
+      :config
+      (ido-mode 1))
 
-(use-package ido-completing-read+
-  :after (ido)
-  :config
-  (ido-ubiquitous-mode))
+    (use-package ido-completing-read+
+      :after (ido)
+      :config
+      (ido-ubiquitous-mode))
 
-(use-package ido-vertical-mode
-  :after (ido)
-  :config
-  (ido-vertical-mode 1)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+    (use-package ido-vertical-mode
+      :after (ido)
+      :config
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
-(use-package ido-yes-or-no
-  :after (ido)
-  :config (ido-yes-or-no-mode 1))
-#+end_src
+    (use-package ido-yes-or-no
+      :after (ido)
+      :config (ido-yes-or-no-mode 1))
+  #+end_src
 
 * =magit=
 
-#+begin_src emacs-lisp
-(use-package magit
-  :bind ("C-x g" . magit-status)
-  :config
-  (setq magit-completing-read-function 'magit-ido-completing-read))
-#+end_src
+  #+begin_src emacs-lisp
+    (use-package magit
+      :bind ("C-x g" . magit-status)
+      :config
+      (setq magit-completing-read-function 'magit-ido-completing-read))
+  #+end_src
 
 * =ag=
 
-I use =ag= (aka The Silver Searcher) to search for files. I also use
-the integrations with =helm= and =projectile=
+  I use =ag= (aka The Silver Searcher) to search for files. I also use
+  the integrations with =helm= and =projectile=
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
-#+end_src
+  #+end_src
 
 * Indentation
-#+begin_src emacs-lisp
-(use-package smart-tabs-mode
-  :config
-  (setq-default indent-tabs-mode nil)
-  (smart-tabs-insinuate 'c 'javascript))
+  #+begin_src emacs-lisp
+    (use-package smart-tabs-mode
+      :config
+      (setq-default indent-tabs-mode nil)
+      (smart-tabs-insinuate 'c 'javascript))
 
-(use-package indent-info
-  :config (global-indent-info-mode +1))
-#+end_src
+    (use-package indent-info
+      :config (global-indent-info-mode +1))
+  #+end_src
 * Layout/Windows
 
-#+begin_src emacs-lisp
-(use-package rotate
-  :bind ("C-c l" . rotate-layout))
-#+end_src
+  #+begin_src emacs-lisp
+    (use-package rotate
+      :bind ("C-c l" . rotate-layout))
+  #+end_src
 * Snippets
 
-I use =yasnippet= for snippets
+  I use =yasnippet= for snippets
 
-#+begin_src emacs-lisp
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :config
-  (yas-global-mode t))
+  #+begin_src emacs-lisp
+    (use-package yasnippet
+      :diminish yas-minor-mode
+      :config
+      (yas-global-mode t))
 
-(use-package yasnippet-snippets
-  :after (yasnippet))
+    (use-package yasnippet-snippets
+      :after (yasnippet))
 
-(use-package common-lisp-snippets
-  :after (yasnippet))
-#+end_src
+    (use-package common-lisp-snippets
+      :after (yasnippet))
+  #+end_src
 
 * =helpful=
 
-I find =helpful= to be more helpful than the built-in help functions.
+  I find =helpful= to be more helpful than the built-in help functions.
 
-#+begin_src emacs-lisp
-(use-package helpful
-  :bind
-  ("C-h f" . helpful-callable) ; replace describe-function
-  ("C-h v" . helpful-variable) ; replace describe-variable
-  ("C-h k" . helpful-key))     ; replace describe-key
-#+end_src
+  #+begin_src emacs-lisp
+    (use-package helpful
+      :bind
+      ("C-h f" . helpful-callable) ; replace describe-function
+      ("C-h v" . helpful-variable) ; replace describe-variable
+      ("C-h k" . helpful-key))     ; replace describe-key
+  #+end_src
 
 * =exec-path-from-shell=
 
-I use =exec-path-from-shell= for (only) MacOS systems.
+  I use =exec-path-from-shell= for (only) MacOS systems.
 
-#+begin_src emacs-lisp
-(use-package exec-path-from-shell
-  :if
-  (memq window-system '(mac ns))
-  :hook
-  (after-init . exec-path-from-shell-initialize)
-  :custom
-  (exec-path-from-shell-check-startup-files nil))
-#+end_src
+  #+begin_src emacs-lisp
+    (use-package exec-path-from-shell
+      :if
+      (memq window-system '(mac ns))
+      :hook
+      (after-init . exec-path-from-shell-initialize)
+      :custom
+      (exec-path-from-shell-check-startup-files nil))
+  #+end_src
 
 * Text Editing
 
-What Emacs has problems with: text-editing.
+  What Emacs has problems with: text-editing.
 
 ** General
 
-If I've highlighted a region and then type or paste text, I want it to
-replace the region, not append it:
+   If I've highlighted a region and then type or paste text, I want it to
+   replace the region, not append it:
 
-#+begin_src emacs-lisp
-(delete-selection-mode 1)
-#+end_src
+   #+begin_src emacs-lisp
+     (delete-selection-mode 1)
+   #+end_src
 
-=global-subword-mode= helps me navigate variables (since everything is
-camelCased nowadays).
+   =global-subword-mode= helps me navigate variables (since everything is
+   camelCased nowadays).
 
-#+begin_src emacs-lisp
-(global-subword-mode 1)
-#+end_src
+   #+begin_src emacs-lisp
+     (global-subword-mode 1)
+   #+end_src
 
 *** Parentheses
-Did you know Lisp uses a few parentheses?
+    Did you know Lisp uses a few parentheses?
 
-I want to see the corresponding opening/closing delimiter.
+    I want to see the corresponding opening/closing delimiter.
 
-#+begin_src emacs-lisp
-(show-paren-mode 1)
-#+end_src
+    #+begin_src emacs-lisp
+      (show-paren-mode 1)
+    #+end_src
 
-If I insert a starting delimiter, I almost always want the closing delimiter as well.
+    If I insert a starting delimiter, I almost always want the closing delimiter as well.
 
-#+begin_src emacs-lisp
-(electric-pair-mode t)
-#+end_src
+    #+begin_src emacs-lisp
+      (electric-pair-mode t)
+    #+end_src
 
-Having =rainbow-delimiteres= helps me determine when I've got an
-unbalanced set of parentheses (or other delimiters).
+    Having =rainbow-delimiteres= helps me determine when I've got an
+    unbalanced set of parentheses (or other delimiters).
 
-#+begin_src emacs-lisp
-(use-package rainbow-delimiters
-  :hook (lisp-mode))
-#+end_src
+    #+begin_src emacs-lisp
+      (use-package rainbow-delimiters
+        :hook (lisp-mode))
+    #+end_src
 
 *** =company=
 
-I use =company= as the auto-suggestion framework.
+    I use =company= as the auto-suggestion framework.
 
 *** =flycheck=
 
-#+begin_src emacs-lisp
-(use-package flycheck
-  :diminish
-  :init (global-flycheck-mode))
-#+end_src
+    #+begin_src emacs-lisp
+      (use-package flycheck
+        :diminish
+        :init (global-flycheck-mode))
+    #+end_src
 
-#+begin_src emacs-lisp
-(use-package company
-  :config (add-hook 'after-init-hook 'global-company-mode))
-#+end_src
+    #+begin_src emacs-lisp
+      (use-package company
+        :config (add-hook 'after-init-hook 'global-company-mode))
+    #+end_src
 
 ** lsp
-#+begin_src emacs-lisp
-(use-package lsp-mode
-    :hook ((rust-mode . lsp))
-    :commands lsp
-    :config (setq lsp-keymap-prefix "s-l"))
+   #+begin_src emacs-lisp
+     (use-package lsp-mode
+       :hook ((rust-mode . lsp))
+       :commands lsp
+       :config (setq lsp-keymap-prefix "s-l"))
 
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
-#+end_src
+     (use-package lsp-ui :commands lsp-ui-mode)
+     (use-package helm-lsp :commands helm-lsp-workspace-symbol)
+   #+end_src
 
 ** Org
 
-#+begin_src emacs-lisp
-(use-package org-superstar
-  :hook (org-mode . org-superstar-mode))
+   #+begin_src emacs-lisp
+     (use-package org-superstar
+       :hook (org-mode . org-superstar-mode))
 
-#+end_src
+   #+end_src
 
 ** Markdown
 
-#+begin_src emacs-lisp
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md]]'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package markdown-mode
+       :commands (markdown-mode gfm-mode)
+       :mode (("README\\.md]]'" . gfm-mode)
+              ("\\.md\\'" . markdown-mode)
+              ("\\.markdown\\'" . markdown-mode))
+       :init (setq markdown-command "multimarkdown"))
+   #+end_src
 
 ** JS
 
-#+begin_src emacs-lisp
-(setq js-indent-level 2)
-#+end_src
+   #+begin_src emacs-lisp
+     (setq js-indent-level 2)
+   #+end_src
 
 * Functions
-Whoa, I can write elisp!
+  Whoa, I can write elisp!
 
-#+begin_src emacs-lisp
-(defun solkaz/generate-md-buffer ()
-  "Generate a scratch buffer in gfm-mode."
-  (interactive)
-  (switch-to-buffer (generate-new-buffer "*md-scratch*"))
-  (gfm-mode))
+  #+begin_src emacs-lisp
+    (defun solkaz/generate-md-buffer ()
+      "Generate a scratch buffer in gfm-mode."
+      (interactive)
+      (switch-to-buffer (generate-new-buffer "*md-scratch*"))
+      (gfm-mode))
 
-(defun solkaz/surround (begin end char)
-  "Surround region at BEGIN and END with CHAR."
-  (interactive  "r\nsChar to Insert: ")
-  (save-excursion
-    (goto-char end)
-    (insert char)
-    (goto-char begin)
-    (insert char)))
+    (defun solkaz/surround (begin end char)
+      "Surround region at BEGIN and END with CHAR."
+      (interactive  "r\nsChar to Insert: ")
+      (save-excursion
+        (goto-char end)
+        (insert char)
+        (goto-char begin)
+        (insert char)))
 
-(defun solkaz/open-dotfiles ()
-  "Open my dotfiles directory in dired."
-  (interactive)
-  (dired "~/dot-files"))
+    (defun solkaz/open-dotfiles ()
+      "Open my dotfiles directory in dired."
+      (interactive)
+      (dired "~/dot-files"))
 
-; https://stackoverflow.com/a/9697222
-(defun solkaz/comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
+                                            ; https://stackoverflow.com/a/9697222
+    (defun solkaz/comment-or-uncomment-region-or-line ()
+      "Comments or uncomments the region or the current line if there's no active region."
+      (interactive)
+      (let (beg end)
         (if (region-active-p)
             (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
+          (setq beg (line-beginning-position) end (line-end-position)))
         (comment-or-uncomment-region beg end)))
-#+end_src
+  #+end_src
 
 * Enabled functions
 
-Enable some functions that are disabled by default.
+  Enable some functions that are disabled by default.
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
-  (setq functions-to-enable
-        '(downcase-region upcase-region narrow-to-region))
+    (setq functions-to-enable
+          '(downcase-region upcase-region narrow-to-region))
 
-  (mapc
-   (lambda
-     (func)
-     (put 'func 'disabled nil))
-   functions-to-enable)
-#+end_src
+    (mapc
+     (lambda
+       (func)
+       (put 'func 'disabled nil))
+     functions-to-enable)
+  #+end_src
 
 * Keybindings
 
-#+begin_src emacs-lisp
-;; Keybinds
-(global-set-key (kbd "M-o") 'other-window)
-(global-unset-key (kbd "s-t"))
-(global-unset-key (kbd "<C-down-mouse-1>"))
-(global-set-key (kbd "s-/") 'solkaz/comment-or-uncomment-region-or-line)
-(global-set-key (kbd "C-a") 'back-to-indentation)
-(global-set-key (kbd "M-m") 'move-beginning-of-line)
-(global-set-key (kbd "C-c r") 'query-replace)
-(global-set-key (kbd "C-c R") 'query-replace-regexp)
-(global-set-key (kbd "C-c s") 'solkaz/surround)
-(global-set-key (kbd "C-c e") 'eshell)
-(global-set-key (kbd "C-c d") 'solkaz/open-dotfiles)
-(global-set-key (kbd "C-c w") 'whitespace-mode)
-(global-set-key (kbd "C-c <left>") 'hs-hide-block)
-(global-set-key (kbd "C-c <right>") 'hs-show-block)
-(global-set-key (kbd "C-x k") (lambda () (interactive) (kill-buffer (current-buffer))))
-#+end_src
+  #+begin_src emacs-lisp
+    ;; Keybinds
+    (global-set-key (kbd "M-o") 'other-window)
+    (global-unset-key (kbd "s-t"))
+    (global-unset-key (kbd "<C-down-mouse-1>"))
+    (global-set-key (kbd "s-/") 'solkaz/comment-or-uncomment-region-or-line)
+    (global-set-key (kbd "C-a") 'back-to-indentation)
+    (global-set-key (kbd "M-m") 'move-beginning-of-line)
+    (global-set-key (kbd "C-c r") 'query-replace)
+    (global-set-key (kbd "C-c R") 'query-replace-regexp)
+    (global-set-key (kbd "C-c s") 'solkaz/surround)
+    (global-set-key (kbd "C-c e") 'eshell)
+    (global-set-key (kbd "C-c d") 'solkaz/open-dotfiles)
+    (global-set-key (kbd "C-c w") 'whitespace-mode)
+    (global-set-key (kbd "C-c <left>") 'hs-hide-block)
+    (global-set-key (kbd "C-c <right>") 'hs-show-block)
+    (global-set-key (kbd "C-x k") (lambda () (interactive) (kill-buffer (current-buffer))))
+  #+end_src
 
 ** MacOS
-Some MacOS-specific keybindings
+   Some MacOS-specific keybindings
 
-#+begin_src emacs-lisp
-(when (memq window-system '(mac ns x))
-  (global-unset-key (kbd "s-q")))
-#+end_src
+   #+begin_src emacs-lisp
+     (when (memq window-system '(mac ns x))
+       (global-unset-key (kbd "s-q")))
+   #+end_src
 
 * Misc packages
 
 ** =crux=
 
-#+begin_src emacs-lisp
-(use-package crux
-  :bind ("C-c I" . 'crux-find-user-init-file))
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package crux
+       :bind ("C-c I" . 'crux-find-user-init-file))
+   #+end_src
 
 ** fireplace
-#+begin_src emacs-lisp
-(use-package fireplace)
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package fireplace)
+   #+end_src
 
 ** sicp
-#+begin_src emacs-lisp
-(use-package sicp)
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package sicp)
+   #+end_src
 
 ** =easy-kill=
-#+begin_src emacs-lisp
-(use-package easy-kill
-  :config
-  (global-set-key [remap kill-ring-save] 'easy-kill))
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package easy-kill
+       :config
+       (global-set-key [remap kill-ring-save] 'easy-kill))
+   #+end_src
 
 * =desktop-save-mode=
 
-I want to come back to what I was doing after restarting Emacs.
+  I want to come back to what I was doing after restarting Emacs.
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
-(desktop-save-mode 1)
-#+end_src
+    (desktop-save-mode 1)
+  #+end_src
 
 * Custom variables
 
-Some custom-set variables.
+  Some custom-set variables.
 
-Disable the startup message:
+  Disable the startup message:
 
-#+begin_src emacs-lisp
-(setq inhibit-startup-message t)
-#+end_src
+  #+begin_src emacs-lisp
+    (setq inhibit-startup-message t)
+  #+end_src
 
-Disable warning about following symlinks. This is useful because
-opening symlinked files from my home directory (that were placed there
-by GNU Stow) will emit a warning prompt:
+  Disable warning about following symlinks. This is useful because
+  opening symlinked files from my home directory (that were placed there
+  by GNU Stow) will emit a warning prompt:
 
-#+begin_src emacs-lisp
-(setq vc-follow-symlinks t)
-#+end_src
+  #+begin_src emacs-lisp
+    (setq vc-follow-symlinks t)
+  #+end_src
 
-I don't want save files to be created next to the file I'm editing (as
-it creates annoyances with Git). Instead, I prefer to keep them all in
-a single directory.
+  I don't want save files to be created next to the file I'm editing (as
+  it creates annoyances with Git). Instead, I prefer to keep them all in
+  a single directory.
 
-#+begin_src emacs-lisp
-(setq backup-directory-alist `(("." . "~/.saves")))
-#+end_src
+  #+begin_src emacs-lisp
+    (setq backup-directory-alist `(("." . "~/.saves")))
+  #+end_src
 
-#+begin_src emacs-lisp
-(setq dired-use-ls-dired nil
-      ring-bell-function 'ignore
-      create-lockfiles nil
-      scroll-conservatively 100)
-#+end_src
+  #+begin_src emacs-lisp
+    (setq dired-use-ls-dired nil
+          ring-bell-function 'ignore
+          create-lockfiles nil
+          scroll-conservatively 100)
+  #+end_src
 
 * Visual stuff
 
-I use [[https://www.nordtheme.com/ports/emacs/][=nord-theme=]] as my base theme
+  I use [[https://www.nordtheme.com/ports/emacs/][=nord-theme=]] as my base theme
 
-#+begin_src emacs-lisp
-(use-package nord-theme
-  :config
-  (load-theme 'nord t))
-#+end_src
+  #+begin_src emacs-lisp
+    (use-package nord-theme
+      :config
+      (load-theme 'nord t))
+  #+end_src
 
-=powerline= makes my modeline look nicer
+  =powerline= makes my modeline look nicer
 
-#+begin_src emacs-lisp
-(use-package powerline
-  :config (powerline-default-theme))
-#+end_src
+  #+begin_src emacs-lisp
+    (use-package powerline
+      :config (powerline-default-theme))
+  #+end_src
 
-=emojify= displays emojis :100:. =company-emoji= allows me to write
-emojis more easily :muscle:
+  =emojify= displays emojis :100:. =company-emoji= allows me to write
+  emojis more easily :muscle:
 
-#+begin_src emacs-lisp
-(use-package emojify
-  :hook
-  (after-init . global-emojify-mode)
-  :config
-  (setq emojify-company-tooltips-p t))
+  #+begin_src emacs-lisp
+    (use-package emojify
+      :hook
+      (after-init . global-emojify-mode)
+      :config
+      (setq emojify-company-tooltips-p t))
 
-(use-package company-emoji
-  :after (company)
-  :init
-  (add-to-list 'company-backends 'company-emoji))
-#+end_src
+    (use-package company-emoji
+      :after (company)
+      :init
+      (add-to-list 'company-backends 'company-emoji))
+  #+end_src
 
-GUI menus take up space. If I am using a windowed system, they should
-be disabled.
+  GUI menus take up space. If I am using a windowed system, they should
+  be disabled.
 
-#+begin_src emacs-lisp
-(when window-system
-  (progn
-    (tool-bar-mode 0)
-    (scroll-bar-mode -1)
-    (horizontal-scroll-bar-mode -1)))
-#+end_src
+  #+begin_src emacs-lisp
+    (when window-system
+      (progn
+        (tool-bar-mode 0)
+        (scroll-bar-mode -1)
+        (horizontal-scroll-bar-mode -1)))
+  #+end_src
 
-Disable blinking cursor:
+  Disable blinking cursor:
 
-#+begin_src emacs-lisp
-(blink-cursor-mode 0)
-#+end_src
+  #+begin_src emacs-lisp
+    (blink-cursor-mode 0)
+  #+end_src
 
-Enable =column-number-mode= so I can see the cursor's column position
-in modeline:
+  Enable =column-number-mode= so I can see the cursor's column position
+  in modeline:
 
-#+begin_src emacs-lisp
-(column-number-mode t)
-#+end_src
+  #+begin_src emacs-lisp
+    (column-number-mode t)
+  #+end_src
 
 * Custom settings
 
-Finally, I load custom settings. I set =custom-file= to a location in
-my home directory, and ensure that it exists (creating an empty file
-if it's not there) before loading it.
+  Finally, I load custom settings. I set =custom-file= to a location in
+  my home directory, and ensure that it exists (creating an empty file
+  if it's not there) before loading it.
 
-#+begin_src emacs-lisp
-(setq custom-file "~/.emacs-custom.el")
-(unless (file-exists-p custom-file)
-  (write-region "" nil custom-file))
-(load custom-file)
-#+end_src
+  #+begin_src emacs-lisp
+    (setq custom-file "~/.emacs-custom.el")
+    (unless (file-exists-p custom-file)
+      (write-region "" nil custom-file))
+    (load custom-file)
+  #+end_src
