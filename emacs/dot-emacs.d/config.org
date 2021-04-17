@@ -284,6 +284,12 @@ I use =company= as the auto-suggestion framework.
   :init (setq markdown-command "multimarkdown"))
 #+end_src
 
+** JS
+
+#+begin_src emacs-lisp
+(setq js-indent-level 2)
+#+end_src
+
 * Functions
 Whoa, I can write elisp!
 
