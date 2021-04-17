@@ -268,8 +268,9 @@ I use =company= as the auto-suggestion framework.
 ** Org
 
 #+begin_src emacs-lisp
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode))
+
 #+end_src
 
 ** Markdown
