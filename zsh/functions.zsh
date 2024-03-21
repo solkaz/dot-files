@@ -42,3 +42,7 @@ function caps_to_ctrl() {
 function correct-monitor() {
     xrandr --output VGA-1 --left-of DVI-I-1 --rotate left
 }
+
+function pretty_path() {
+    echo $PATH | sed 's/:/\n/g' | sort -f
+}
