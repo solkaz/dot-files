@@ -17,6 +17,6 @@ function my_git_prompt() {
   fi
 }
 
-PROMPT=$'%{$fg_bold[blue]%}┌─[👾%{$fg_bold[blue]%} | %{$fg_bold[green]%}%~ %{$fg_bold[blue]%}| %b%{$fg[yellow]%}'%D{"⏳ %a, %b %e, %Y"}%B" · "%b%{$fg[yellow]%}%D{"%I:%M:%S ⌛"}%b$'%{$fg_bold[blue]%}]
+PROMPT=$'%{$fg_bold[blue]%}┌─[$(hostname)%{$fg_bold[blue]%} | %{$fg_bold[green]%}%~ %{$fg_bold[blue]%}| %b%{$fg[yellow]%}'%D{"⏳ %a, %b %e, %Y"}%B" · "%b%{$fg[yellow]%}%D{"%I:%M:%S ⌛"}%b$'%{$fg_bold[blue]%}]
 %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?%{$fg_bold[blue]%}]%b$(my_git_prompt)%{$reset_color%} '
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
